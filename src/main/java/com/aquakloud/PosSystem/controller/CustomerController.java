@@ -59,17 +59,23 @@ public class CustomerController {
     @GetMapping(
             path = "get-all-customer"
     )
-    public List<CustomerDTO> getAllCustomer(){
+    public ResponseEntity<StandardResponse> getAllCustomer(){
        List<CustomerDTO> customerDTOS = customerService.getAllCustomer();
-        return customerDTOS;
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(202,"Success",customerDTOS),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping(
             path = "get-all-customers-by-active-state/{status}"
     )
-    public List<CustomerDTO> getAllCustomersByActiveState(@PathVariable(value = "status") boolean activeStatus){
+    public ResponseEntity<StandardResponse> getAllCustomersByActiveState(@PathVariable(value = "status") boolean activeStatus){
         List<CustomerDTO> customerDTOS = customerService.getAllCustomersByActiveState(activeStatus);
-        return customerDTOS;
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",customerDTOS),
+                HttpStatus.OK
+        );
     }
 
 }
